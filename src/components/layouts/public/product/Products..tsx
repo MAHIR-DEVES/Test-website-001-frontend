@@ -14,7 +14,7 @@ const Products = async () => {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-              Just For You
+              All Products
             </h2>
           </div>
         </div>

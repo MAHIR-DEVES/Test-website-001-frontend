@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -28,7 +27,7 @@ const ProductCard1 = ({ product, isFeatured }: ProductCard1Props) => {
 
   return (
     <Link href={`/products/${product.slug}`} className="group block h-full">
-      <Card className="h-full overflow-hidden border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-slate-900  shadow-xs  flex flex-col justify-between p-0">
+      <Card className="h-full overflow-hidden border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-slate-900  shadow-xs  flex flex-col justify-between p-0 ">
         {/* IMAGE CONTAINER (FLUSH TO EDGES WITH NO TOP GAP) */}
         <div className="relative w-full overflow-hidden bg-gray-100 dark:bg-slate-800">
           <AspectRatio ratio={1.15} className="w-full">
@@ -65,55 +64,17 @@ const ProductCard1 = ({ product, isFeatured }: ProductCard1Props) => {
         </div>
 
         {/* CONTENT DETAILS */}
-        <CardContent className="p-3.5 flex flex-col flex-1 justify-between gap-2.5">
+        <CardContent className="p-3.5 flex flex-col flex-1 justify-between gap-2.5 text-center">
           <div className="space-y-1">
-            {/* CATEGORY / BRAND */}
-            {(product.category?.name || product.brand) && (
-              <p className="text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 line-clamp-1">
-                {product.category?.name || product.brand}
-              </p>
-            )}
-
             {/* PRODUCT NAME */}
             <h3 className="font-semibold text-gray-800 dark:text-gray-100 text-xs sm:text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
               {product.name}
             </h3>
-            {/*  description*/}
-            <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-1">
-              {product.description}
-            </p>
           </div>
 
           <div className="space-y-1.5 pt-1">
-            {/* RATING & STOCK */}
-            <div className="flex items-center justify-between text-xs">
-              {/* GOLD FILLED STAR */}
-              <div className="flex items-center gap-1">
-                <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                <span className="font-bold text-gray-800 dark:text-gray-200">
-                  {product.rating > 0 ? product.rating.toFixed(1) : '5.0'}
-                </span>
-                <span className="text-[11px] text-gray-400">
-                  ({product.reviewCount || 1})
-                </span>
-              </div>
-
-              {/* STOCK STATUS */}
-              <span
-                className={`text-[11px] font-semibold ${
-                  product.stock > 0
-                    ? 'text-emerald-600 dark:text-emerald-400'
-                    : 'text-rose-500'
-                }`}
-              >
-                {product.stock > 0
-                  ? `${product.stock} in stock`
-                  : 'Out of stock'}
-              </span>
-            </div>
-
             {/* PRICE */}
-            <div className="flex items-baseline gap-1.5 pt-0.5">
+            <div className="flex items-baseline justify-center gap-1.5 pt-0.5">
               <span className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white tracking-tight">
                 ৳{salePrice.toLocaleString('en-BD')}
               </span>
@@ -123,6 +84,10 @@ const ProductCard1 = ({ product, isFeatured }: ProductCard1Props) => {
                   ৳{product.price.toLocaleString('en-BD')}
                 </span>
               )}
+            </div>
+            {/* ORDER NOW */}{' '}
+            <div className="w-full rounded-md bg-primary py-2 text-center text-xs sm:text-sm font-semibold text-primary-foreground transition-all duration-200 group-hover:bg-primary/90">
+              অর্ডার করুন{' '}
             </div>
           </div>
         </CardContent>

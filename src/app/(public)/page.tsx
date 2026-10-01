@@ -10,10 +10,10 @@ export default function Home() {
     <div className="container mx-auto  px-2">
       <Banner></Banner>
       <Category></Category>
-      <TopDeal></TopDeal>
-      <PromoBanner></PromoBanner>
+      {/* <TopDeal></TopDeal> */}
+      {/* <PromoBanner></PromoBanner> */}
       <Products></Products>
-      <FooterCTA></FooterCTA>
+      {/* <FooterCTA></FooterCTA> */}
     </div>
   );
 }

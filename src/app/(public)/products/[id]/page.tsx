@@ -1,6 +1,6 @@
 import ProductGallery from '@/components/layouts/public/product-details/ProductGallery';
 import ProductPurchaseOptions from '@/components/layouts/public/product-details/ProductPurchaseOptions';
-import ProductReviews from '@/components/layouts/public/product-details/ProductReviews';
+// import ProductReviews from '@/components/layouts/public/product-details/ProductReviews';
 import RelatedProduct from '@/components/layouts/public/product-details/RelatedProduct';
 import ProductViewTracker from '@/components/layouts/shared/analytics/ProductViewTracker';
 import { getSingleProduct } from '@/services/product.service';
@@ -376,11 +376,11 @@ export default async function ProductDetailsPage({
       ====================================================== */}
 
       {/* Reviews */}
-      <ProductReviews
+      {/* <ProductReviews
         reviews={product.reviews || []}
         rating={product.rating}
         reviewCount={product.reviewCount}
-      />
+      /> */}
 
       {/* related product */}
       <RelatedProduct categoryId={product.categoryId}></RelatedProduct>
