@@ -83,10 +83,10 @@
      Brand Colors
   ========================== */
 
-  --primary: #ad1a60;
-  --primary-hover: #d8255d;
-  --primary-active: #ed315d;
-  --primary-light: #fff0f5;
+  --primary: #0f1f5a;
+  --primary-hover: #1b347d;
+  --primary-active: #29458f;
+  --primary-light: #eef2ff;
 
   --primary-foreground: #ffffff;
 
@@ -95,43 +95,43 @@
   ========================== */
 
   --background: #ffffff;
-  --foreground: #17121a;
+  --foreground: #111827;
 
   --card: #ffffff;
-  --card-foreground: #17121a;
+  --card-foreground: #111827;
 
   --popover: #ffffff;
-  --popover-foreground: #17121a;
+  --popover-foreground: #111827;
 
   /* ==========================
      Secondary
   ========================== */
 
-  --secondary: #fff7f9;
-  --secondary-foreground: #3f1728;
+  --secondary: #f4f6ff;
+  --secondary-foreground: #172554;
 
-  --muted: #fdf1f5;
-  --muted-foreground: #76616a;
+  --muted: #f1f4fb;
+  --muted-foreground: #64748b;
 
   /* ==========================
      Accent
   ========================== */
 
-  --accent: #fff0f4;
-  --accent-foreground: #ad1a60;
+  --accent: #eef2ff;
+  --accent-foreground: #0f1f5a;
 
   /* ==========================
      Border & Input
   ========================== */
 
-  --border: #f1dce4;
-  --input: #f1dce4;
+  --border: #dbe2f0;
+  --input: #dbe2f0;
 
   /* ==========================
      Focus Ring
   ========================== */
 
-  --ring: #ad1a60;
+  --ring: #0f1f5a;
 
   /* ==========================
      Status
@@ -152,63 +152,63 @@
      Charts
   ========================== */
 
-  --chart-1: #ad1a60;
-  --chart-2: #d8255d;
-  --chart-3: #f25774;
-  --chart-4: #f14669;
-  --chart-5: #ed315d;
+  --chart-1: #0f1f5a;
+  --chart-2: #1b347d;
+  --chart-3: #29458f;
+  --chart-4: #4162aa;
+  --chart-5: #6683c5;
 
   /* ==========================
      Sidebar
   ========================== */
 
   --sidebar: #ffffff;
-  --sidebar-foreground: #17121a;
+  --sidebar-foreground: #111827;
 
-  --sidebar-primary: #ad1a60;
+  --sidebar-primary: #0f1f5a;
   --sidebar-primary-foreground: #ffffff;
 
-  --button-hover-1: #fff0f4;
-  --button-hover-1-foreground: #ad1a60;
+  --button-hover-1: #eef2ff;
+  --button-hover-1-foreground: #0f1f5a;
 
-  --hover: #fff0f4;
+  --hover: #eef2ff;
 
-  --sidebar-border: #f1dce4;
-  --sidebar-ring: #ad1a60;
+  --sidebar-border: #dbe2f0;
+  --sidebar-ring: #0f1f5a;
 
   /* ==========================
      Typography
   ========================== */
 
-  --title: #ad1a60;
-  --subtitle: #d8255d;
-  --hover-text: #d8255d;
-  --body: #76616a;
+  --title: #0f1f5a;
+  --subtitle: #1b347d;
+  --hover-text: #1b347d;
+  --body: #64748b;
 
   /* ==========================
      Buttons
   ========================== */
 
-  --button: #ad1a60;
-  --button-hover: #d8255d;
+  --button: #0f1f5a;
+  --button-hover: #1b347d;
   --button-text: #ffffff;
 
   /* ==========================
      Links
   ========================== */
 
-  --link: #ad1a60;
-  --link-hover: #d8255d;
+  --link: #0f1f5a;
+  --link-hover: #1b347d;
 
   /* ==========================
      Gradients
   ========================== */
 
-  --gradient-primary: linear-gradient(135deg, #ad1a60 0%, #d8255d 100%);
+  --gradient-primary: linear-gradient(135deg, #0f1f5a 0%, #1b347d 100%);
 
-  --gradient-secondary: linear-gradient(135deg, #d8255d 0%, #f25774 100%);
+  --gradient-secondary: linear-gradient(135deg, #1b347d 0%, #4162aa 100%);
 
-  --gradient-dark: linear-gradient(135deg, #ad1a60 0%, #ed315d 100%);
+  --gradient-dark: linear-gradient(135deg, #0f1f5a 0%, #29458f 100%);
 }
 
 /* =========================================================
@@ -217,15 +217,15 @@
 
 @layer utilities {
   .bg-gradient-primary {
-    background-image: linear-gradient(135deg, #ad1a60 0%, #d8255d 100%);
+    background-image: linear-gradient(135deg, #0f1f5a 0%, #1b347d 100%);
   }
 
   .bg-gradient-secondary {
-    background-image: linear-gradient(135deg, #d8255d 0%, #f25774 100%);
+    background-image: linear-gradient(135deg, #1b347d 0%, #4162aa 100%);
   }
 
   .bg-gradient-dark {
-    background-image: linear-gradient(135deg, #ad1a60 0%, #ed315d 100%);
+    background-image: linear-gradient(135deg, #0f1f5a 0%, #29458f 100%);
   }
 }
 
@@ -234,24 +234,24 @@
 ========================================================= */
 
 .dark {
-  --background: #120b10;
-  --foreground: #fff7fa;
+  --background: #080d20;
+  --foreground: #f8fafc;
 
-  --card: #1b1017;
-  --card-foreground: #fff7fa;
+  --card: #0d142b;
+  --card-foreground: #f8fafc;
 
-  --popover: #1b1017;
-  --popover-foreground: #fff7fa;
+  --popover: #0d142b;
+  --popover-foreground: #f8fafc;
 
   /* ==========================
      Brand
   ========================== */
 
-  --primary: #d8255d;
-  --primary-hover: #f25774;
-  --primary-active: #ed315d;
+  --primary: #29458f;
+  --primary-hover: #4162aa;
+  --primary-active: #5273ba;
 
-  --primary-light: rgba(216, 37, 93, 0.14);
+  --primary-light: rgba(41, 69, 143, 0.16);
 
   --primary-foreground: #ffffff;
 
@@ -259,18 +259,18 @@
      Secondary
   ========================== */
 
-  --secondary: #27151e;
-  --secondary-foreground: #fff7fa;
+  --secondary: #121b38;
+  --secondary-foreground: #f8fafc;
 
-  --muted: #27151e;
-  --muted-foreground: #c8aab6;
+  --muted: #121b38;
+  --muted-foreground: #aab5d0;
 
   /* ==========================
      Accent
   ========================== */
 
-  --accent: #351622;
-  --accent-foreground: #f25774;
+  --accent: #18264c;
+  --accent-foreground: #8ea7e0;
 
   /* ==========================
      Border & Input
@@ -283,47 +283,47 @@
      Ring
   ========================== */
 
-  --ring: #d8255d;
+  --ring: #4162aa;
 
   /* ==========================
      Sidebar
   ========================== */
 
-  --sidebar: #1b1017;
-  --sidebar-foreground: #fff7fa;
+  --sidebar: #0d142b;
+  --sidebar-foreground: #f8fafc;
 
-  --sidebar-primary: #d8255d;
+  --sidebar-primary: #29458f;
   --sidebar-primary-foreground: #ffffff;
 
-  --button-hover-1: #351622;
-  --button-hover-1-foreground: #f25774;
+  --button-hover-1: #18264c;
+  --button-hover-1-foreground: #8ea7e0;
 
   --sidebar-border: rgba(255, 255, 255, 0.09);
-  --sidebar-ring: #d8255d;
+  --sidebar-ring: #4162aa;
 
   /* ==========================
      Typography
   ========================== */
 
-  --title: #f25774;
-  --subtitle: #d8255d;
-  --hover-text: #f25774;
-  --body: #c8aab6;
+  --title: #8ea7e0;
+  --subtitle: #6683c5;
+  --hover-text: #a9bde9;
+  --body: #aab5d0;
 
   /* ==========================
      Buttons
   ========================== */
 
-  --button: #d8255d;
-  --button-hover: #f25774;
+  --button: #29458f;
+  --button-hover: #4162aa;
   --button-text: #ffffff;
 
   /* ==========================
      Links
   ========================== */
 
-  --link: #f25774;
-  --link-hover: #ff7890;
+  --link: #8ea7e0;
+  --link-hover: #a9bde9;
 }
 
 /* =========================================================
@@ -349,7 +349,7 @@
 ========================================================= */
 
 .swiper-pagination-bullet {
-  background: #f8c9d6;
+  background: #b8c4e2;
   opacity: 1;
   width: 8px;
   height: 8px;
@@ -357,7 +357,7 @@
 }
 
 .swiper-pagination-bullet-active {
-  background: #ad1a60 !important;
+  background: #0f1f5a !important;
   width: 20px;
   border-radius: 10px;
 }
@@ -366,22 +366,20 @@
    SCROLLBAR
 ========================================================= */
 
-/* Chrome, Edge, Safari */
-
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #fff1f5;
+  background: #eef2ff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ad1a60;
+  background: #0f1f5a;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d8255d;
+  background: #1b347d;
 }
