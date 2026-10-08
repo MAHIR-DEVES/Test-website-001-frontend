@@ -13,21 +13,20 @@ import {
   LogOut,
   MessageSquare,
   ChartNoAxesCombined,
-  UserStar,
   NotebookPen,
-  ChevronDown,
 } from 'lucide-react';
 import { BiSolidCategory } from 'react-icons/bi';
 import Image from 'next/image';
-import {
-  Building2,
-  UserRound,
-  WalletCards,
-  HandCoins,
-  Truck,
-  Store,
-  CalendarClock,
-} from 'lucide-react';
+import { FaFileInvoice } from 'react-icons/fa';
+// import {
+//   Building2,
+//   UserRound,
+//   WalletCards,
+//   HandCoins,
+//   Truck,
+//   Store,
+//   CalendarClock,
+// } from 'lucide-react';
 
 const AdminSidebar = ({
   isOpen,
@@ -46,6 +45,7 @@ const AdminSidebar = ({
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
     { name: 'Products', href: '/admin/products', icon: Package },
     { name: 'Orders', href: '/admin/orders', icon: ShoppingCart },
+    { name: 'Invoices', href: '/admin/invoices', icon: FaFileInvoice },
     {
       name: 'Customers Contact',
       href: '/admin/customer-contact',
@@ -70,43 +70,43 @@ const AdminSidebar = ({
     { name: 'Profile', href: '/admin/profile', icon: User },
   ];
 
-  const accountSubItems = [
-    {
-      name: 'Central',
-      href: '/admin/accounts/central',
-      icon: Building2,
-    },
-    {
-      name: 'Personal',
-      href: '/admin/accounts/personal',
-      icon: UserRound,
-    },
-    {
-      name: 'Steadfast Withdrawal',
-      href: '/admin/accounts/steadfast-withdrawal',
-      icon: WalletCards,
-    },
-    {
-      name: 'Investor Payment',
-      href: '/admin/accounts/investor-payment',
-      icon: HandCoins,
-    },
-    {
-      name: 'Shipment',
-      href: '/admin/accounts/shipment',
-      icon: Truck,
-    },
-    {
-      name: 'Whole Sale',
-      href: '/admin/accounts/whole-sale',
-      icon: Store,
-    },
-    {
-      name: 'Fixed Monthly Cost',
-      href: '/admin/accounts/monthly-cost',
-      icon: CalendarClock,
-    },
-  ];
+  // const accountSubItems = [
+  //   {
+  //     name: 'Central',
+  //     href: '/admin/accounts/central',
+  //     icon: Building2,
+  //   },
+  //   {
+  //     name: 'Personal',
+  //     href: '/admin/accounts/personal',
+  //     icon: UserRound,
+  //   },
+  //   {
+  //     name: 'Steadfast Withdrawal',
+  //     href: '/admin/accounts/steadfast-withdrawal',
+  //     icon: WalletCards,
+  //   },
+  //   {
+  //     name: 'Investor Payment',
+  //     href: '/admin/accounts/investor-payment',
+  //     icon: HandCoins,
+  //   },
+  //   {
+  //     name: 'Shipment',
+  //     href: '/admin/accounts/shipment',
+  //     icon: Truck,
+  //   },
+  //   {
+  //     name: 'Whole Sale',
+  //     href: '/admin/accounts/whole-sale',
+  //     icon: Store,
+  //   },
+  //   {
+  //     name: 'Fixed Monthly Cost',
+  //     href: '/admin/accounts/monthly-cost',
+  //     icon: CalendarClock,
+  //   },
+  // ];
 
   const isActive = (href: string) => {
     if (href === '/admin') {
@@ -208,7 +208,7 @@ const AdminSidebar = ({
 
           {/* Accounts */}
           <div>
-            <button
+            {/* <button
               type="button"
               onClick={() => {
                 if (!isOpen) {
@@ -248,10 +248,10 @@ const AdminSidebar = ({
                   `}
                 />
               )}
-            </button>
+            </button> */}
             {/* Accounts Submenu */}
             {/* Accounts Submenu */}{' '}
-            <AnimatePresence initial={false}>
+            {/* <AnimatePresence initial={false}>
               {' '}
               {isOpen && accountsOpen && (
                 <motion.div
@@ -300,8 +300,7 @@ const AdminSidebar = ({
                             }}
                             className={` relative flex gap-2 items-center rounded-xs px-3 py-2 text-sm transition-all duration-200 ${active ? 'bg-[#d0f1e8] font-medium text-primary' : 'text-gray-500 hover:bg-button-hover-1 hover:text-primary dark:text-gray-400'} `}
                           >
-                            {' '}
-                            {/* Active indicator */}{' '}
+                            
                             {active && (
                               <motion.span
                                 layoutId="account-active"
@@ -327,7 +326,7 @@ const AdminSidebar = ({
                   </motion.div>{' '}
                 </motion.div>
               )}{' '}
-            </AnimatePresence>
+            </AnimatePresence> */}
           </div>
         </div>
       </nav>

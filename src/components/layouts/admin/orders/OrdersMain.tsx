@@ -10,10 +10,11 @@ import {
 
 import { Order, OrderStatus } from '@/types/orders';
 
-import CustomerContactHeader from '../shared/orders/CustomerContactHeader';
-import CustomerContactTable from './CustomerContactTable';
 import OrderSummary from '../shared/orders/OrderSummary';
 import OrderDetailsModal from '../shared/orders/OrderDetailsModal';
+import CustomerContactTable from './CustomerContactTable';
+
+import { Search, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 const ITEMS_PER_PAGE = 10;
@@ -22,16 +23,15 @@ const OrdersMain = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Default = DELIVERED
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState<OrderStatus | 'ALL'>('ALL');
 
   const [currentPage, setCurrentPage] = useState(1);
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
-  // Separate action loading states
   const [updatingOrderId, setUpdatingOrderId] = useState<string | null>(null);
   const [deletingOrderId, setDeletingOrderId] = useState<string | null>(null);
 
@@ -50,9 +50,12 @@ const OrdersMain = () => {
     totalShipped: 0,
     totalDelivered: 0,
     totalCancelled: 0,
+    totalPartial: 0,
   });
 
+  // =====================================================
   // FETCH ORDERS
+  // =====================================================
 
   const fetchOrders = useCallback(async () => {
     try {
@@ -89,7 +92,9 @@ const OrdersMain = () => {
     fetchOrders();
   }, [fetchOrders]);
 
+  // =====================================================
   // SEARCH
+  // =====================================================
 
   const handleSearch = (value: string) => {
     setSearch(value);
@@ -97,7 +102,9 @@ const OrdersMain = () => {
     setSelectedIds([]);
   };
 
-  // FILTER STATUS
+  // =====================================================
+  // STATUS FILTER
+  // =====================================================
 
   const handleStatusChange = (value: OrderStatus | 'ALL') => {
     setStatus(value);
@@ -105,7 +112,9 @@ const OrdersMain = () => {
     setSelectedIds([]);
   };
 
+  // =====================================================
   // PAGINATION
+  // =====================================================
 
   const changePage = (page: number) => {
     if (page < 1 || page > meta.totalPages) {
@@ -141,7 +150,9 @@ const OrdersMain = () => {
     return [current - 2, current - 1, current, current + 1, current + 2];
   }, [meta.totalPages, meta.page]);
 
+  // =====================================================
   // SELECT
+  // =====================================================
 
   const allSelected =
     orders.length > 0 && orders.every(order => selectedIds.includes(order.id));
@@ -172,12 +183,9 @@ const OrdersMain = () => {
     );
   };
 
-  const selectedOrders = useMemo(
-    () => orders.filter(order => selectedIds.includes(order.id)),
-    [orders, selectedIds],
-  );
-
-  // UPDATE ORDER STATUS
+  // =====================================================
+  // UPDATE STATUS
+  // =====================================================
 
   const handleUpdateStatus = async (
     orderId: string,
@@ -188,21 +196,14 @@ const OrdersMain = () => {
     }
 
     try {
-      console.log('Updating order status:', orderId, newStatus);
-
       setUpdatingOrderId(orderId);
 
-      // 1. API call
-      const response = await updateOrderStatus(orderId, newStatus);
+      await updateOrderStatus(orderId, newStatus);
 
-      if (response?.success === true) {
-        toast.success('Order status updated successfully');
-      }
+      toast.success('Order status updated successfully');
 
-      // 2. API success fetch fresh data from database
       await fetchOrders();
 
-      // 3. Modal open  selected order   update
       setSelectedOrder(prev => {
         if (!prev || prev.id !== orderId) {
           return prev;
@@ -213,8 +214,6 @@ const OrdersMain = () => {
           status: newStatus,
         };
       });
-
-      toast.success('Order status updated successfully');
     } catch (error) {
       console.error('Failed to update order status:', error);
 
@@ -224,7 +223,9 @@ const OrdersMain = () => {
     }
   };
 
-  // DELETE ORDER
+  // =====================================================
+  // DELETE
+  // =====================================================
 
   const handleDeleteOrder = async (orderId: string) => {
     if (!orderId) {
@@ -240,22 +241,14 @@ const OrdersMain = () => {
     }
 
     try {
-      console.log('Deleting order:', orderId);
-
       setDeletingOrderId(orderId);
 
-      // 1. API call
-      const response = await deleteOrder(orderId);
+      await deleteOrder(orderId);
 
-      console.log('Delete order response:', response);
-
-      // 2.if API success fetch fresh data from database
       await fetchOrders();
 
-      // 3. Selection update
       setSelectedIds(prev => prev.filter(id => id !== orderId));
 
-      // 4. Modal open  close
       setSelectedOrder(prev => (prev?.id === orderId ? null : prev));
 
       toast.success('Order deleted successfully');
@@ -268,120 +261,125 @@ const OrdersMain = () => {
     }
   };
 
-  // COPY PHONES
-
-  const handleCopyPhones = async () => {
-    const phones = selectedOrders
-      .map(order => order.phone || order.user?.phone)
-      .filter(Boolean);
-
-    if (!phones.length) {
-      toast.warning('Please select at least one order');
-      return;
-    }
-
-    try {
-      await navigator.clipboard.writeText(phones.join('\n'));
-
-      toast.success(
-        `${phones.length} phone number${phones.length > 1 ? 's' : ''} copied`,
-      );
-    } catch (error) {
-      console.error('Failed to copy phones:', error);
-    }
-  };
-
-  // EXPORT CSV
-
-  const handleExportCSV = () => {
-    const exportOrders = selectedIds.length > 0 ? selectedOrders : orders;
-
-    if (!exportOrders.length) {
-      toast.warning('No orders to export');
-      return;
-    }
-
-    const headers = [
-      'Invoice',
-      'Name',
-      'Address',
-      'Phone',
-      'Amount',
-      'Note',
-      'Lot',
-      'Delivery Type',
-      'Contact Name',
-      'Contact Phone',
-    ];
-
-    const rows = exportOrders.map((order, index) => [
-      index + 1,
-
-      order.name || order.user?.name || '',
-
-      order.address || '',
-
-      `="${order.phone || order.user?.phone || ''}"`,
-
-      order.total ?? order.totalAmount ?? 0,
-
-      order.note || '',
-
-      getOrderQuantity(order),
-
-      'Home',
-
-      'JonoPrio.com',
-
-      '="01310520842"',
-    ]);
-
-    const csv = [headers, ...rows]
-      .map(row =>
-        row
-          .map(value => `"${String(value ?? '').replace(/"/g, '""')}"`)
-          .join(','),
-      )
-      .join('\n');
-
-    const blob = new Blob([csv], {
-      type: 'text/csv;charset=utf-8;',
-    });
-
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-
-    link.href = url;
-
-    link.download = `orders-${new Date().toISOString().slice(0, 10)}.csv`;
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
-
-    URL.revokeObjectURL(url);
-  };
-
+  // =====================================================
   // UI
+  // =====================================================
 
   return (
-    <div className="space-y-6 p-2 md:p-4">
-      <CustomerContactHeader
-        search={search}
-        status={status}
-        selectedCount={selectedIds.length}
-        orderCount={orders.length}
-        hasOrders={orders.length > 0}
-        onSearch={handleSearch}
-        onStatusChange={handleStatusChange}
-        onCopyPhones={handleCopyPhones}
-        onExportCSV={handleExportCSV}
-      />
+    <div className="space-y-4">
+      {/* =================================================
+          SEARCH + FILTER
+      ================================================= */}
+
+      <h2 className="text-xl font-bold">Orders Management</h2>
+
+      <div className="rounded-md border bg-background p-4">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          {/* SEARCH */}
+
+          <div className="relative w-full lg:max-w-md">
+            <Search
+              className="
+                absolute
+                left-3
+                top-1/2
+                h-4
+                w-4
+                -translate-y-1/2
+                text-muted-foreground
+              "
+            />
+
+            <input
+              type="text"
+              value={search}
+              onChange={e => handleSearch(e.target.value)}
+              placeholder="Search name, phone or email..."
+              className="
+                h-10
+                w-full
+                rounded-lg
+                border
+                bg-background
+                pl-9
+                pr-9
+                text-sm
+                outline-none
+                focus:border-primary
+                focus:ring-2
+                focus:ring-primary/20
+              "
+            />
+
+            {search && (
+              <button
+                type="button"
+                onClick={() => handleSearch('')}
+                className="
+                  absolute
+                  right-3
+                  top-1/2
+                  -translate-y-1/2
+                  text-muted-foreground
+                  hover:text-foreground
+                "
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+
+          {/* FILTER */}
+
+          <div className="flex items-center gap-3">
+            <select
+              value={status}
+              onChange={e =>
+                handleStatusChange(e.target.value as OrderStatus | 'ALL')
+              }
+              className="
+                h-10
+                rounded-lg
+                border
+                bg-background
+                px-3
+                text-sm
+                outline-none
+                focus:border-primary
+                focus:ring-2
+                focus:ring-primary/20
+              "
+            >
+              <option value="ALL">All Status</option>
+
+              <option value="PENDING">Pending</option>
+
+              <option value="SHIPPED">Shipped</option>
+
+              <option value="DELIVERED">Delivered</option>
+
+              <option value="CANCELLED">Cancelled</option>
+
+              <option value="PARTIAL">Partial</option>
+            </select>
+
+            <p className="whitespace-nowrap text-sm text-muted-foreground">
+              {meta.total} order
+              {meta.total !== 1 ? 's' : ''}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* =================================================
+          SUMMARY
+      ================================================= */}
 
       <OrderSummary {...summary} />
+
+      {/* =================================================
+          ORDERS TABLE
+      ================================================= */}
 
       <CustomerContactTable
         fetchOrders={fetchOrders}
@@ -391,7 +389,6 @@ const OrdersMain = () => {
         paginationPages={paginationPages}
         onSelectAll={handleSelectAll}
         onSelect={handleSelect}
-        onView={setSelectedOrder}
         onPageChange={changePage}
         loading={loading}
         onUpdateStatus={handleUpdateStatus}
@@ -400,9 +397,22 @@ const OrdersMain = () => {
         deletingOrderId={deletingOrderId}
       />
 
+      {/* =================================================
+          ORDER DETAILS MODAL
+      ================================================= */}
+
       {selectedOrder && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          className="
+            fixed
+            inset-0
+            z-50
+            flex
+            items-center
+            justify-center
+            bg-black/50
+            p-4
+          "
           onMouseDown={() => setSelectedOrder(null)}
         >
           <OrderDetailsModal
@@ -412,20 +422,6 @@ const OrdersMain = () => {
         </div>
       )}
     </div>
-  );
-};
-
-// ==============================
-// HELPER
-// ==============================
-
-const getOrderQuantity = (order: Order) => {
-  if (typeof order.quantity === 'number') {
-    return order.quantity;
-  }
-
-  return (
-    order.items?.reduce((total, item) => total + (item.quantity || 0), 0) || 0
   );
 };
 

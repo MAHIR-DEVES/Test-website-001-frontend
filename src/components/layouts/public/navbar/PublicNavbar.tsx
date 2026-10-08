@@ -9,12 +9,11 @@ import Link from 'next/link';
 import SearchBar from './SearchBar';
 import { useCartStore } from '@/store/cart.store';
 import { getUser } from '@/utils/auth';
-import Image from 'next/image';
 import UserDropdown from './UserDropdown';
-import DesktopNav from './DesktopNav';
 import RightDesktopNev from './RightDesktopNev';
 import MobileSidebar from './MobileSidebar';
 import { IUser } from '@/types/auth';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const PublicNavbar = ({ className }: { className?: string }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -66,28 +65,165 @@ const PublicNavbar = ({ className }: { className?: string }) => {
               <MobileSidebar user={user}></MobileSidebar>
 
               {/* mobile Logo */}
-              <Link className=" md:hidden items-center mr-20 shrink-0" href="/">
-                <div className="flex items-center">
-                  <Image
-                    src="/images/sera-place-logo.png"
-                    alt="Logo"
-                    width={110}
-                    height={110}
-                  />
+              <Link
+                href="/"
+                className="md:hidden md:flex items-center shrink-0 group"
+              >
+                <div className="flex items-center gap-3.5">
+                  {/* Brand Icon */}
+                  <div
+                    className="
+        relative flex h-12 w-12 items-center justify-center
+        rounded-[14px]
+        
+       
+       
+        
+      "
+                  >
+                    {/* Orange Accent */}
+                    <span
+                      className="
+          absolute right-1.5 top-1.5
+          h-2 w-2 rounded-full
+          bg-[#FF6B35]
+          
+        "
+                    />
+
+                    <FaShoppingCart
+                      className="
+          
+          text-[#0F1F5A]
+        "
+                    />
+                  </div>
+
+                  {/* Brand Typography */}
+                  <div className="flex flex-col -ml-3 mt-1">
+                    {/* Main Brand */}
+                    <div className="flex items-center leading-[0.9]">
+                      <span
+                        className="
+            text-[20px] font-[800]
+            tracking-[-0.065em]
+            text-[#0F1F5A]
+          "
+                      >
+                        SHOP
+                      </span>
+
+                      <span
+                        className="
+            ml-[5px]
+            text-[20px] font-[800]
+            tracking-[-0.065em]
+            text-[#FF6B35]
+          "
+                      >
+                        DEAL
+                      </span>
+                    </div>
+
+                    {/* MART */}
+                    <div className=" flex items-center gap-2">
+                      <span className="h-px w-6 bg-[#0F1F5A]/25" />
+
+                      <span
+                        className="
+            text-[8px] font-extrabold
+            uppercase
+            tracking-[0.48em]
+            text-[#0F1F5A]/65
+          "
+                      >
+                        MART
+                      </span>
+
+                      <span className="h-px w-6 bg-[#0F1F5A]/25" />
+                    </div>
+                  </div>
                 </div>
               </Link>
-              {/* desktop Logo */}
+              {/* Desktop Logo */}
               <Link
-                className="hidden md:flex flex items-center mr-20 shrink-0"
                 href="/"
+                className="hidden md:flex items-center shrink-0 group"
               >
-                <div className="flex items-center">
-                  <Image
-                    src="/images/sera-place-logo.png"
-                    alt="Logo"
-                    width={170}
-                    height={170}
-                  />
+                <div className="flex items-center gap-3.5">
+                  {/* Brand Icon */}
+                  <div
+                    className="
+        relative flex h-12 w-12 items-center justify-center
+        rounded-[14px]
+        
+       
+       
+        
+      "
+                  >
+                    {/* Orange Accent */}
+                    <span
+                      className="
+          absolute right-1.5 top-1.5
+          h-2 w-2 rounded-full
+          bg-[#FF6B35]
+          
+        "
+                    />
+
+                    <FaShoppingCart
+                      className="
+          h-[40px] w-[40px]
+          text-[#0F1F5A]
+        "
+                    />
+                  </div>
+
+                  {/* Brand Typography */}
+                  <div className="flex flex-col -ml-3 mt-1">
+                    {/* Main Brand */}
+                    <div className="flex items-center leading-[0.9]">
+                      <span
+                        className="
+            text-[20px] font-[800]
+            tracking-[-0.065em]
+            text-[#0F1F5A]
+          "
+                      >
+                        SHOP
+                      </span>
+
+                      <span
+                        className="
+            ml-[5px]
+            text-[20px] font-[800]
+            tracking-[-0.065em]
+            text-[#FF6B35]
+          "
+                      >
+                        DEAL
+                      </span>
+                    </div>
+
+                    {/* MART */}
+                    <div className=" flex items-center gap-2">
+                      <span className="h-px w-6 bg-[#0F1F5A]/25" />
+
+                      <span
+                        className="
+            text-[8px] font-extrabold
+            uppercase
+            tracking-[0.48em]
+            text-[#0F1F5A]/65
+          "
+                      >
+                        MART
+                      </span>
+
+                      <span className="h-px w-6 bg-[#0F1F5A]/25" />
+                    </div>
+                  </div>
                 </div>
               </Link>
             </div>
@@ -114,7 +250,7 @@ const PublicNavbar = ({ className }: { className?: string }) => {
         </div>
 
         {/* DESKTOP NAV */}
-        <DesktopNav />
+        {/* <DesktopNav /> */}
 
         {/* MOBILE SCROLL LINKS */}
         {/* <div className="flex lg:hidden gap-4 py-2 text-xs text-gray-600 overflow-x-auto whitespace-nowrap border-t scrollbar-hide">
